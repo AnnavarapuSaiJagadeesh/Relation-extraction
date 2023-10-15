@@ -143,9 +143,11 @@ def main():
             print(f"Epoch {epoch}:")
             for index, (text, relation) in enumerate(train_loader):
                 # train classifier
+                
                 print(f"Train: {index * batch_size} / {train_size}")
 
                 batch = list(text)
+                print(index)
                 tok = re_module.tokenizer(batch, padding=True, truncation=True, return_tensors="pt").to(device)
                 b_input_ids, b_token_type_ids, b_attention_mask = tok["input_ids"], tok["token_type_ids"], tok["attention_mask"]
                 b_labels = relation.to(device)
@@ -157,12 +159,14 @@ def main():
                     attention_mask=b_attention_mask,
                     labels=b_labels
                 )
+                print("forward after")
                 loss = forw[0]
                 logits = forw[1]
                 loss.backward()
                 torch.nn.utils.clip_grad_norm_(re_module.bert_model.parameters(), 1.0)
                 optimizer.step()
                 scheduler.step()
+                print("after scheduler")
 
                 # accuracy
                 acc = (torch.argmax(logits, dim=1) == b_labels).sum().item() / len(b_labels)
