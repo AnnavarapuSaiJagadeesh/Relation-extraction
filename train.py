@@ -167,11 +167,11 @@ def main():
                 optimizer.step()
                 scheduler.step()
                 print("after scheduler")
-
                 # accuracy
                 print("printing accuracy")
                 acc = (torch.argmax(logits, dim=1) == b_labels).sum().item() / len(b_labels)
-                print(f"Train: {index * batch_size:8d} / {train_size:8d} - loss: {loss.item():8f}, acc: {acc:5f}", end="\r")
+                print(acc)
+                print(f"Train: {index * batch_size:8d} / {train_size:8d} - loss: {loss.item():8f}, acc: {acc:5f}", end="\n")
 
             torch.save(re_module.bert_model.state_dict(), f"./model_{args.dataset}.bin")
             print(f"Model saved as './model_{args.dataset}.bin'")
