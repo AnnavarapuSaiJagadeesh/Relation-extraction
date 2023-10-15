@@ -147,7 +147,7 @@ def main():
                 print(f"Train: {index * batch_size} / {train_size}")
 
                 batch = list(text)
-                print(index)
+                # print(index)
                 tok = re_module.tokenizer(batch, padding=True, truncation=True, return_tensors="pt").to(device)
                 b_input_ids, b_token_type_ids, b_attention_mask = tok["input_ids"], tok["token_type_ids"], tok["attention_mask"]
                 b_labels = relation.to(device)
@@ -159,18 +159,18 @@ def main():
                     attention_mask=b_attention_mask,
                     labels=b_labels
                 )
-                print("forward after")
+                # print("forward after")
                 loss = forw[0]
                 logits = forw[1]
                 loss.backward()
                 torch.nn.utils.clip_grad_norm_(re_module.bert_model.parameters(), 1.0)
                 optimizer.step()
                 scheduler.step()
-                print("after scheduler")
+                # print("after scheduler")
                 # accuracy
-                print("printing accuracy")
+                # print("printing accuracy")
                 acc = (torch.argmax(logits, dim=1) == b_labels).sum().item() / len(b_labels)
-                print(acc)
+                # print(acc)
                 print(f"Train: {index * batch_size:8d} / {train_size:8d} - loss: {loss.item():8f}, acc: {acc:5f}", end="\n")
 
             torch.save(re_module.bert_model.state_dict(), f"./model_{args.dataset}.bin")
