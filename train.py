@@ -132,7 +132,8 @@ def main():
     else:
         print("No model for BertForSequenceClassification is found.")
     
-    if input("Finetune BertForSequenceClassification? [no] / yes: ") == "yes":
+    # if input("Finetune BertForSequenceClassification? [no] / yes: ") == "yes":
+    if True:
         # epochs
         for epoch in range(epochs):
             print(f"Epoch {epoch}:")
