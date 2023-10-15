@@ -79,7 +79,8 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # config batch size
     # batch_size = 16
-    batch_size = 256
+    # batch_size = 256
+    batch_size = 128
     # batch_size = 720
     # get number of classes
     if args.dataset == "semeval":
