@@ -80,7 +80,7 @@ def main():
     # config batch size
     # batch_size = 16
     # batch_size = 64
-    batch_size = 32
+    batch_size = 16
     # batch_size = 256
     # batch_size = 128
     # batch_size = 720
