@@ -169,6 +169,7 @@ def main():
                 print("after scheduler")
 
                 # accuracy
+                print("printing accuracy")
                 acc = (torch.argmax(logits, dim=1) == b_labels).sum().item() / len(b_labels)
                 print(f"Train: {index * batch_size:8d} / {train_size:8d} - loss: {loss.item():8f}, acc: {acc:5f}", end="\r")
 
